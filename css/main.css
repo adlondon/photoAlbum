@@ -1,0 +1,44 @@
+section {
+  display: none; }
+
+.active {
+  display: block; }
+
+header {
+  text-align: center; }
+
+.mainView {
+  width: 900px;
+  margin: 0 auto; }
+  .mainView .albumDiv {
+    display: inline-block;
+    margin: 0 auto;
+    width: 33%;
+    text-align: center; }
+    .mainView .albumDiv img {
+      height: 200px;
+      width: 90%; }
+
+.albumView {
+  width: 1200px;
+  margin: 0 auto; }
+  .albumView .albumName {
+    width: 100%;
+    text-align: center; }
+  .albumView .navBar {
+    display: inline-block;
+    width: 30%;
+    background-color: blue; }
+
+.albumContent {
+  display: inline-block;
+  width: 66%;
+  margin: 0 auto; }
+  .albumContent .photoDiv {
+    display: inline-block;
+    margin: 0 auto;
+    width: 33%;
+    text-align: center; }
+    .albumContent .photoDiv img {
+      height: 200px;
+      width: 90%; }
