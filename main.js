@@ -2,21 +2,41 @@
 
 var albumDisplay ="";
 _.each(img, function (item) {
-  albumDisplay += "<div class='albumDiv'id='" + item.albumRel + "'>"
+  albumDisplay += "<div class='albumDiv'rel='" + item.albumRel + "'>"
   + "<img  src='" + item.albumCover + "'>"
   + "<p>" + item.albumTitle + "</p>"
   + "</div>"
 });
 $('.mainView').append(albumDisplay);
 
+// ************************** NAV BAR
+
+ var navDisplay ="";
+ _.each(img, function (item) {
+   navDisplay += "<div class ='navItems rel=" + item.albumRel + "'>" + item.albumTitle + "</div>"
+
+ });
+
+ $(".navBar").html(navDisplay)
 
 
+$(".albumView").on("click", ".navItems", function () {
+  var selectedNav = $(this).attr("rel");
+  var filteredNav = img.filter(function (el) {
+    return el.albumRel === selectedNav;
+  });
+  $('.albumDiv').not(this).find('li').hide();
+
+})
+
+
+// *************************** SELECTED ALBUM VIEW
 var selectedAlbum ="";
 $(".albumDiv").on("click", function(el) {
   el.preventDefault();
   $("section").removeClass("active");
   $(".albumView").addClass("active");
-  selectedAlbum = $(this).attr("id");
+  selectedAlbum = $(this).attr("rel");
   setPhotoDisplay(selectedAlbum)
 })
 
@@ -30,35 +50,38 @@ var getAlbumPhotos = function (albumclicked) {
 var setPhotoDisplay = function (albumselected) {
 var photoDisplay = "";
 _.each(getAlbumPhotos(selectedAlbum), function (item) {
-  photoDisplay += "<div class='photoDiv' id='" + item.photoRel+ "'>"
+  photoDisplay += "<div class='photoDiv' rel ='" + item.photoRel+ "'>"
   + "<img src='" + item.photoThumb + "'>"
   + "<p>" + item.photoName + "</p>"
   + "</div>"
 });
-$(".albumContent").append(photoDisplay)
+$(".albumContent").html(photoDisplay)
 };
+// ************************ SELECTED PHOTO VIEW
+// nathan told me how to do the below code. see main2.js for what I was trying
 
-
-var selectedPhoto ="";
-$('.photoDiv').on("click", function(el) {
+$('.albumContent').on("click",'img', function(el) {
   el.preventDefault();
-  $(".albumView").removeClass("active");
+  console.log("CLICK");
+  $("section").removeClass("active");
   $(".photoView").addClass("active");
-  selectedPhoto = $(this).attr("id");
-  setPhotoFull(selectedPhoto)
+  var selectedPhoto = $(this).attr("src");
+  var selectedFull = selectedPhoto.replace(/thumb\.png/gi,"full.jpeg");
+  console.log(selectedFull);
+  setPhotoFull(selectedFull)
 })
-
-var getPhotoFull = function(photothumbclicked) {
-  var photoFullArray = img.filter(function (el) {
-    return el.photos.photoRel === photothumbclicked;
-  });
-  return photoFullArray[0].photos;
-};
 
 var setPhotoFull = function (photofullget) {
   var photoFull = "";
-  _.each(getPhotoFull(selectedPhoto), function (item) {
-    photoFull += "<div class 'photoFullDiv'>" + item.photoFull + "</div>";
-  });
-  $(".photoFullView").append(photoFull);
+    photoFull += "<div class='photoFullDiv'><img src='" + photofullget + "' /></div>";
+    console.log(photoFull);
+  $(".photoFullView").html(photoFull);
 }
+
+// end of nathans code
+
+$(".backToAlbum").on("click", function(el) {
+  el.preventDefault();
+  $("section").removeClass("active");
+  $(".albumView").addClass("active");
+});
