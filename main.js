@@ -13,22 +13,20 @@ $('.mainView').append(albumDisplay);
 
  var navDisplay ="";
  _.each(img, function (item) {
-   navDisplay += "<div class ='navItems rel=" + item.albumRel + "'>" + item.albumTitle + "</div>"
+   navDisplay += "<div class ='navItems' rel='" + item.albumRel + "'>" + item.albumTitle + "</div>"
 
  });
 
  $(".navBar").html(navDisplay)
 
-
-$(".albumView").on("click", ".navItems", function () {
-  var selectedNav = $(this).attr("rel");
-  var filteredNav = img.filter(function (el) {
-    return el.albumRel === selectedNav;
-  });
-  $('.albumDiv').not(this).find('li').hide();
-
-})
-
+ var selectedPhotoAlbums = "";
+ $('.navBar').on('click', function (event) {
+   console.log ("Navigation is being clicked");
+   event.preventDefault();
+   selectedPhotoAlbums = ($(this).attr('rel'));
+   $('.albumDiv').not(this).find('.albumDiv').hide();
+   setPhotoDisplay(selectedPhotoAlbums);
+ });
 
 // *************************** SELECTED ALBUM VIEW
 var selectedAlbum ="";
