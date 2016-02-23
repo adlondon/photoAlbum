@@ -21,23 +21,24 @@ header {
 
 .albumView {
   width: 1200px;
-  margin: 0 auto; }
+  margin: 20px auto; }
   .albumView .albumName {
     width: 100%;
     text-align: center; }
   .albumView .navBar {
     display: inline-block;
-    width: 30%;
-    background-color: blue; }
+    width: 15%; }
+    .albumView .navBar div {
+      margin: 20px; }
 
 .albumContent {
   display: inline-block;
-  width: 66%;
+  width: 84.5%;
   margin: 0 auto; }
   .albumContent .photoDiv {
     display: inline-block;
     margin: 0 auto;
-    width: 33%;
+    width: 32.96%;
     text-align: center; }
     .albumContent .photoDiv img {
       height: 200px;
@@ -48,3 +49,6 @@ header {
   height: 320px; }
   .photoFullView img {
     width: 75%; }
+
+img {
+  border-radius: 5px; }

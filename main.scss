@@ -26,25 +26,27 @@ header {
 }
 .albumView {
   width: 1200px;
-  margin: 0 auto;
+  margin: 20px auto;
   .albumName {
     width: 100%;
     text-align: center;
   }
   .navBar {
     display: inline-block;
-    width: 30%;
-    background-color: blue;
+    width: 15%;
+    div {
+      margin: 20px;
+    }
   }
 }
 .albumContent {
   display: inline-block;
-  width: 66%;
+  width: 84.5%;
   margin: 0 auto;
   .photoDiv {
     display: inline-block;
     margin: 0 auto;
-    width: 33%;
+    width: 32.96%;
     text-align: center;
     img {
     height: 200px;
@@ -59,4 +61,7 @@ header {
   img {
     width: 75%;
   }
+}
+img {
+  border-radius: 5px;
 }

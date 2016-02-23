@@ -1,44 +1,49 @@
 /* jshint ignore:start */
-
-var albumDisplay ="";
+var albumTemplate = _.template($("#albumTemp").html());
+var albumDisplay =""
 _.each(img, function (item) {
-  albumDisplay += "<div class='albumDiv'rel='" + item.albumRel + "'>"
-  + "<img  src='" + item.albumCover + "'>"
-  + "<p>" + item.albumTitle + "</p>"
-  + "</div>"
+  albumDisplay += albumTemplate(item);
 });
 $('.mainView').append(albumDisplay);
 
 // ************************** NAV BAR
 
+var navTemplate = _.template($("#navTemp").html());
  var navDisplay ="";
  _.each(img, function (item) {
-   navDisplay += "<div class ='navItems' rel='" + item.albumRel + "'>" + item.albumTitle + "</div>"
-
+  navDisplay += navTemplate(item);
  });
-
- $(".navBar").html(navDisplay)
+ $(".navBar").html(navDisplay);
 
  var selectedPhotoAlbums = "";
- $('.navBar').on('click', function (event) {
-   console.log ("Navigation is being clicked");
+ $('.navBar').on('click','.navItems', function (event) {
    event.preventDefault();
-   selectedPhotoAlbums = ($(this).attr('rel'));
-   $('.albumDiv').not(this).find('.albumDiv').hide();
+   selectedPhotoAlbums = $(this).attr('rel');
+   console.log ("Navigation is being clicked",$(this).attr('rel'));
    setPhotoDisplay(selectedPhotoAlbums);
  });
 
+ var photoTemplate = _.template($("#photoTemp").html());
+ // photoTemplate var set outsideof function so it will be global and can be called below with identical template
+
+ var setPhotoDisplay = function (albumselected) {
+  var photoDisplay = "";
+ _.each(getAlbumPhotos(selectedPhotoAlbums), function (item) {
+  photoDisplay += photoTemplate(item)
+ });
+ $(".albumContent").html(photoDisplay)
+ };
 // *************************** SELECTED ALBUM VIEW
-var selectedAlbum ="";
 $(".albumDiv").on("click", function(el) {
   el.preventDefault();
   $("section").removeClass("active");
   $(".albumView").addClass("active");
-  selectedAlbum = $(this).attr("rel");
+  var selectedAlbum = $(this).attr("rel");
   setPhotoDisplay(selectedAlbum)
 })
 
 var getAlbumPhotos = function (albumclicked) {
+  console.log("HI",albumclicked);
   var photoArray = img.filter(function (el) {
     return el.albumRel === albumclicked;
   });
@@ -46,17 +51,18 @@ var getAlbumPhotos = function (albumclicked) {
 }
 
 var setPhotoDisplay = function (albumselected) {
-var photoDisplay = "";
-_.each(getAlbumPhotos(selectedAlbum), function (item) {
-  photoDisplay += "<div class='photoDiv' rel ='" + item.photoRel+ "'>"
-  + "<img src='" + item.photoThumb + "'>"
-  + "<p>" + item.photoName + "</p>"
-  + "</div>"
-});
+  var photoDisplay = "";
+  var items = getAlbumPhotos(albumselected);
+
+  _.each(items, function (item) {
+    photoDisplay += photoTemplate(item)
+  });
 $(".albumContent").html(photoDisplay)
 };
 // ************************ SELECTED PHOTO VIEW
 // nathan told me how to do the below code. see main2.js for what I was trying
+var selectedPhoto ="";
+
 
 $('.albumContent').on("click",'img', function(el) {
   el.preventDefault();
@@ -66,13 +72,19 @@ $('.albumContent').on("click",'img', function(el) {
   var selectedPhoto = $(this).attr("src");
   var selectedFull = selectedPhoto.replace(/thumb\.png/gi,"full.jpeg");
   console.log(selectedFull);
-  setPhotoFull(selectedFull)
+  setPhotoFull(selectedFull);
 })
-
-var setPhotoFull = function (photofullget) {
+// ************************ ON CLICK FOR PIC CHANGE
+$(".photoView").on("click", ".photoFullDiv", function (el) {
+  var selectedPhoto = $(this).next().attr("src");
+  window.glob = $(this);
+  console.log(selectedPhoto);
+  setPhotoFull(selectedPhoto)
+});
+// ********************************************
+var setPhotoFull = function (item) {
   var photoFull = "";
-    photoFull += "<div class='photoFullDiv'><img src='" + photofullget + "' /></div>";
-    console.log(photoFull);
+    photoFull += "<div class='photoFullDiv'><img src='" + item + "' /></div>";
   $(".photoFullView").html(photoFull);
 }
 

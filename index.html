@@ -4,6 +4,31 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="css/main.css" media="screen" title="no title" charset="utf-8">
+        <script type="text/template" id="albumTemp">
+           <div class="albumDiv" rel="<%= albumRel %>">
+            <img src="<%= albumCover %>" alt="">
+            <p><%= albumTitle %></p>
+           </div>
+         </script>
+
+        <script type="text/template" id="navTemp">
+          <div class ="navItems" rel="<%= albumRel %>"><%= albumTitle %></div>
+        </script>
+
+        <script type="text/template" id="photoTemp">
+          <div class="photoDiv" rel="<%= photoRel %>" >
+            <img src="<%= photoThumb %>" alt="" />
+            <p>
+              <%= photoName %>
+            </p>
+          </div>
+        </script>
+
+        <!-- <script type="text/template" id="photoFullTemp">
+          <div class="photoFullDiv"><img src="<%= photofullget" alt=""/></div>
+        </script> -->
+
+
     <title>Photo Album</title>
   </head>
   <body>
