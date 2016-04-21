@@ -8,11 +8,10 @@ A photo album application built with jQuery
 
 ----------------------------------
 
-This project was created to fulfill an assignment for The Iron Yard Charleston's Front-End Engineering course. The original assignment text is below:
+This repository was created in order to fulfill an assignment for the Front-End Engineering course at [The Iron Yard](https://www.theironyard.com/locations/charleston.html "The Iron Yard"). The original assignment text is below:
 
 ----------------------------------
-
-*Week 3, Day 4*
+**Week 3, Day 4**
 
 ##jQuery - Photo Albums
 We'll create a simple single-page application that lets us view photos grouped by album.
